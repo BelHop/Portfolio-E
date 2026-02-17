@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import React from "react"
 
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,18 +34,71 @@ const RevealOnScroll = ({ children }) => {
   );
 };
 
-const BioComponent = ({ date }) => {
+const VizComponent = () => {
+  const vizRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const divElement = vizRef.current;
+    if (!divElement) return;
+
+    const vizElement = divElement.getElementsByTagName("object")[0];
+
+    if (divElement.offsetWidth > 800) {
+      vizElement.style.width = "850px";
+      vizElement.style.height = "1127px";
+    } else if (divElement.offsetWidth > 500) {
+      vizElement.style.width = "850px";
+      vizElement.style.height = "1127px";
+    } else {
+      vizElement.style.width = "100%";
+      vizElement.style.height = "1527px";
+    }
+
+    const scriptElement = document.createElement("script");
+    scriptElement.src = "https://public.tableau.com/javascripts/api/viz_v1.js";
+    vizElement.parentNode?.insertBefore(scriptElement, vizElement);
+  }, []);
+
   return (
-    <div className="terminal-window mx-2 w-full xl:w-4/5 p-6 text-base sm:text-sm md:text-base rounded-md shadow-2xl bg-gray-800 max-h-80">
-      <div className="flex items-center h-10 px-4 bg-gray-900">
-        <div className="h-3 w-3 mr-2 rounded-full bg-red-500"></div>
-        <div className="h-3 w-3 mr-2 rounded-full bg-yellow-500"></div>
-        <div className="h-3 w-3 rounded-full bg-green-500"></div>
-      </div>
-      <pre className="text-gray-300 whitespace-pre" id="terminal-output"></pre>
+    <div
+      ref={vizRef}
+      className="tableauPlaceholder"
+      style={{ position: "relative" }}
+    >
+      <noscript>
+        <a href="#">
+          <img
+            alt="Main View"
+            src="https://public.tableau.com/static/images/Ma/MarylandIncarcerationRatesbyCounty/MainView/1_rss.png"
+            style={{ border: "none" }}
+          />
+        </a>
+      </noscript>
+
+      <object className="tableauViz" style={{ display: "none" }}>
+        <param name="host_url" value="https://public.tableau.com/" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param
+          name="name"
+          value="MarylandIncarcerationRatesbyCounty/MainView"
+        />
+        <param name="tabs" value="no" />
+        <param name="toolbar" value="yes" />
+        <param
+          name="static_image"
+          value="https://public.tableau.com/static/images/Ma/MarylandIncarcerationRatesbyCounty/MainView/1.png"
+        />
+        <param name="animate_transition" value="yes" />
+        <param name="display_static_image" value="yes" />
+        <param name="display_spinner" value="yes" />
+        <param name="display_overlay" value="yes" />
+        <param name="display_count" value="yes" />
+        <param name="language" value="en-US" />
+      </object>
     </div>
   );
-};
+}
 
 export default function Home() {
   let date = Date();
@@ -114,8 +168,13 @@ bg-[size:20px_20px]">
       </div>
       <div className="bg-transparent min-h-screen justify-center mt-0" id="projects">
         <RevealOnScroll>
-          <div className="text-center mb-16">
-            <h2 className="font-bold text-2xl p-2">Projects:</h2>
+          <div className="text-center">
+            <h2 className="font-bold text-2xl p-2 hover:underline underline-offset-2">Projects:</h2>
+          </div>
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <div className="text-center text-white mb-16">
+            Visualizations: <Link className="hover:underline underline-offset-2 hover:font-bold hover:px-3 transition-all" href={"https://public.tableau.com/views/MarylandIncarcerationRatesbyCounty/MainView?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"}>Incarcerations</Link>
           </div>
         </RevealOnScroll>
         <RevealOnScroll>
