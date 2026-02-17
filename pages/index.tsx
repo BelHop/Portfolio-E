@@ -144,7 +144,7 @@ bg-[size:20px_20px]">
                 className="w-48 h-auto hover:scale-125 transition-transform"
               />
               <div>
-                <h1 className="text-lg ">Next proejct underway</h1>
+                <h1 className="text-lg ">Next project underway</h1>
                 <p className="py-6 text-sm hover:underline underline-offset-2 hover:font-bold transition-all">
                   *Under Construction*
                 </p>
