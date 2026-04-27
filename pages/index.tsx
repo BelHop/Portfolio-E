@@ -36,11 +36,18 @@ const RevealOnScroll = ({ children }) => {
 
 export default function Home() {
   let date = Date();
+  const [activeModal, setActiveModal] = useState(null)
 
   return (
-    <main className="relative justify-between bg-[linear-gradient(to_right,#73737320_1px,transparent_1px),linear-gradient(to_bottom,#73737320_1px,transparent_1px)] 
-bg-[size:20px_20px]">
-      <RevealOnScroll>
+    <main className="relative h-full w-full bg-black [&>div.bg-effect]:absolute [&>div.bg-effect]:left-0 [&>div.bg-effect]:right-0 [&>div.bg-effect]:top-[-10%] [&>div.bg-effect]:h-[1000px] [&>div.bg-effect]:w-[1000px] [&>div.bg-effect]:rounded-full [&>div.bg-effect]:bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]">
+    {/* Background effect layers */}
+    <div className="bg-effect opacity-40" />
+    <div className="bg-effect opacity-30 translate-x-1/3 translate-y-1/4" />
+
+    {/* Content wrapper to sit above background */}
+,    <div className="relative z-10">  
+
+    <RevealOnScroll>
         <div className="hero bg-transparent min-h-screen transition-opacity opacity-45">
           <div className="hero-content text-center">
             <img
@@ -103,13 +110,14 @@ bg-[size:20px_20px]">
       <div className="bg-transparent min-h-screen justify-center mt-0" id="projects">
         <RevealOnScroll>
           <div className="text-center">
-            <h2 className="font-bold text-2xl p-2 hover:underline underline-offset-2">Projects:</h2>
+            <h2 className="font-bold text-2xl p-2">Projects:</h2>
           </div>
         </RevealOnScroll>
         <RevealOnScroll>
           <div className="text-center text-white mb-16">
-            Visualizations: <Link className="hover:underline underline-offset-2 hover:font-bold hover:px-3 transition-all" href={"https://public.tableau.com/views/MarylandIncarcerationRatesbyCounty/MainView?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"}>Incarcerations</Link>
+            Visualizations: <Link className="hover:underline underline-offset-2 hover:font-bold hover:px-3 transition-all" href={"https://public.tableau.com/views/MarylandIncarcerationRatesbyCounty/MainView?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"}>Incarcerations</Link> | <Link className="hover:underline underline-offset-2 hover:font-bold hover:px-3 transition-all" href={"https://public.tableau.com/views/SocialCapitalandBirthRates/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"}>Births and Social Capital</Link>
           </div>
+
         </RevealOnScroll>
         <RevealOnScroll>
           <div className="hero bg-transparent">
@@ -151,6 +159,7 @@ bg-[size:20px_20px]">
           <p>Source code found here: <Link className="hover:underline underline-offset-2" href={"https://github.com/BelHop/portfolio"}>Github</Link></p>
         </aside>
       </footer>
+      </div>
     </main>
   )
 }
